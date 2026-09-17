@@ -1,0 +1,642 @@
+/* ==========================================================================
+   MandiX - Component Styles
+   Specialized styles for agricultural services, timeline, chat, voice, and trackers.
+   ========================================================================== */
+
+/* 1. Weather Module Styles */
+.weather-main-card {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.weather-temp-large {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.weather-condition-text {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 6px;
+  color: #e0f2fe;
+}
+
+.weather-grid-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.metric-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  text-align: center;
+}
+
+.metric-box i {
+  font-size: 20px;
+  color: var(--primary-600);
+  margin-bottom: 6px;
+}
+
+.metric-box span {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.metric-box strong {
+  display: block;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.forecast-days-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.forecast-day-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.forecast-day-card .day-name {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.forecast-day-card i {
+  font-size: 24px;
+  margin: 8px 0;
+}
+
+.forecast-day-card .temp-range {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Advisory Boxes */
+.advisory-alert {
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.advisory-alert.success {
+  background: #f0fdf4;
+  border-left: 4px solid #16a34a;
+  color: #14532d;
+}
+
+.advisory-alert.warning {
+  background: #fefce8;
+  border-left: 4px solid #ca8a04;
+  color: #713f12;
+}
+
+.advisory-alert.danger {
+  background: #fef2f2;
+  border-left: 4px solid #dc2626;
+  color: #7f1d1d;
+}
+
+/* 2. Fertilizer Catalog Styles */
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  scrollbar-width: thin;
+}
+
+.filter-tab-btn {
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-tab-btn.active {
+  background: var(--primary-600);
+  color: #ffffff;
+  border-color: var(--primary-600);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-500);
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.product-thumb {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--primary-50);
+  color: var(--primary-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.product-price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary-800);
+  margin: 8px 0 4px;
+}
+
+.product-subsidy-badge {
+  font-size: 11px;
+  color: #166534;
+  background: #dcfce7;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.product-spec-list {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  list-style: none;
+}
+
+.product-spec-list li {
+  margin-bottom: 4px;
+}
+
+.product-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 8px;
+}
+
+/* 4-Step Order Tracker Stepper */
+.stepper-wrapper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 30px 0;
+}
+
+.stepper-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 30px;
+  right: 30px;
+  height: 4px;
+  background: var(--border-color);
+  z-index: 1;
+}
+
+.step-item {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  flex: 1;
+}
+
+.step-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 3px solid var(--border-color);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all var(--transition-fast);
+}
+
+.step-item.completed .step-icon {
+  background: var(--primary-600);
+  border-color: var(--primary-600);
+  color: #fff;
+}
+
+.step-item.active .step-icon {
+  border-color: var(--primary-600);
+  color: var(--primary-600);
+  box-shadow: 0 0 0 4px var(--primary-100);
+}
+
+.step-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 3. Dynamic 12-Step Crop Timeline */
+.timeline-stepper {
+  position: relative;
+  padding-left: 36px;
+  margin-top: 20px;
+}
+
+.timeline-stepper::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 14px;
+  width: 3px;
+  background: var(--primary-200);
+}
+
+.timeline-step-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast);
+}
+
+.timeline-step-card:hover {
+  transform: translateX(4px);
+  border-color: var(--primary-600);
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -36px;
+  top: 14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--primary-600);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 0 0 3px #fff;
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.timeline-header h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary-900);
+}
+
+.timeline-timing {
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--primary-100);
+  color: var(--primary-800);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+/* 4. Equipment Rental Cards */
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.equipment-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+}
+
+.eq-rate-badge {
+  background: #f3e8ff;
+  color: #7e22ce;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+/* 5. Drone Service Cards */
+.drone-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--primary-200);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.drone-card:hover {
+  border-color: var(--primary-600);
+  box-shadow: var(--shadow-md);
+}
+
+/* 6. Government Schemes Directory */
+.scheme-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.scheme-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.scheme-dept {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.scheme-benefits-list {
+  margin: 12px 0;
+  padding-left: 20px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+
+.scheme-benefits-list li {
+  margin-bottom: 6px;
+}
+
+/* 7. Mandi Queue & Slot Token Widget */
+.mandi-token-display {
+  background: linear-gradient(135deg, #14532d 0%, #15803d 100%);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 24px;
+}
+
+.token-big-badge {
+  display: inline-block;
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 24px;
+  border-radius: var(--radius-md);
+  margin: 12px 0;
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+}
+
+.queue-flow-progress {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.queue-stage-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.queue-stage-box.current {
+  background: #ffffff;
+  color: #14532d;
+  font-weight: 700;
+}
+
+/* 8. Customer Support Live Chat */
+.chat-window {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  height: 440px;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.chat-bubble.bot {
+  background: var(--bg-main);
+  color: var(--text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+  border: 1px solid var(--border-color);
+}
+
+.chat-bubble.user {
+  background: var(--primary-600);
+  color: #ffffff;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+
+.chat-input-row {
+  padding: 12px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input-row input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  outline: none;
+  font-size: 13.5px;
+}
+
+/* 9. AI Voice Assistant Dialog */
+.voice-dialog-content {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.voice-mic-big {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--primary-600);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 25px rgba(22, 163, 74, 0.4);
+  transition: all var(--transition-fast);
+}
+
+.voice-mic-big.active {
+  background: #dc2626;
+  animation: voicePulse 1.5s infinite;
+}
+
+.voice-transcript-box {
+  background: var(--bg-main);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sample-queries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.chip-query {
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--primary-800);
+  transition: all var(--transition-fast);
+}
+
+.chip-query:hover {
+  background: var(--primary-100);
+  border-color: var(--primary-600);
+}
+
+/* 10. Map Container */
+#mapContainer {
+  height: 480px;
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  z-index: 1;
+}
+
+/* 11. Admin Tables */
+.admin-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.admin-table th {
+  background: var(--bg-main);
+  color: var(--text-muted);
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.admin-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.admin-table tr:hover td {
+  background: var(--primary-50);
+}

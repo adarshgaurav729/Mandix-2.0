@@ -1,22 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration For Slot - booking</title>
-    <link rel="stylesheet" href="Login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MandiX - Login (किसान लॉगिन)</title>
+
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="Login.css">
 </head>
 <body>
   <div class="container">
     <div class="form-box" id="login">
-         <form action="">
-            <h2>login</h2>
-            <input type="tel" name="number" placeholder="Phone number">
-            <input  placeholder=" Enter OTP" required>
-            <button type="submit" name="login">Login</button>
-            <p>Don't have an account? <a href="regis.html">Register</a></p>
-         </form>
-    
+      <div style="text-align:center;margin-bottom:12px;">
+        <span style="background:#dcfce7;color:#15803d;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;">
+          MandiX Smart Platform
+        </span>
+      </div>
+
+      <h2>लॉग इन (Login)</h2>
+      <p style="font-size:13px;color:#475569;margin-bottom:18px;">
+        अपने मोबाइल नंबर और ओटीपी के माध्यम से सुरक्षित लॉगिन करें।
+      </p>
+
+      <form id="loginForm">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">मोबाइल नंबर (Phone Number):</label>
+        <div style="display:flex;gap:8px;margin-bottom:16px;">
+          <input type="tel" id="loginPhone" name="number" placeholder="Enter 10-digit Phone" value="9876543210" style="margin-bottom:0;" required>
+          <button type="button" id="btnLoginSendOtp" style="width:auto;white-space:nowrap;margin-bottom:0;padding:12px 16px;background:#0284c7;color:#fff;">
+            ओटीपी भेजें
+          </button>
+        </div>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">ओटीपी (Enter OTP):</label>
+        <input type="text" id="loginOtp" placeholder="Enter OTP (डेमो: 1234)" value="1234" required>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">लॉगिन भूमिका (Select Role):</label>
+        <select id="loginRole" required>
+          <option value="farmer">👨‍🌾 Farmer (किसान)</option>
+          <option value="provider">🚜 Service Provider (सेवा प्रदाता)</option>
+          <option value="admin">⚙️ Admin (मंडी अधिकारी / प्रशासक)</option>
+          <option value="support">🎧 Support Agent (हेल्पलाइन एजेंट)</option>
+        </select>
+
+        <button type="submit" name="login" id="btnLoginSubmit">लॉग इन करें (Login)</button>
+
+        <p>खाता नहीं है? (Don't have an account?) <a href="regis.html">Register Here</a></p>
+        <p style="margin-top:10px;"><a href="index.html">← Back to Platform Home</a></p>
+      </form>
+    </div>
   </div>
+
+  <script type="module">
+    import { state } from './js/state.js';
+
+    document.getElementById('btnLoginSendOtp').addEventListener('click', () => {
+      const phone = document.getElementById('loginPhone').value;
+      alert(`डेमो ओटीपी 1234 आपके मोबाइल नंबर ${phone} पर भेजा गया है।`);
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const role = document.getElementById('loginRole').value;
+      state.setRole(role);
+
+      alert(`लॉगिन सफल! आप "${role}" के रूप में प्रवेश कर रहे हैं।`);
+      if (role === 'admin') {
+        window.location.href = 'index.html#admin';
+      } else {
+        window.location.href = 'index.html#dashboard';
+      }
+    });
+  </script>
 </body>
 </html>

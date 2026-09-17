@@ -1,25 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration For Slot - booking</title>
-    <link rel="stylesheet" href="Login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MandiX - Farmer Registration (किसान पंजीकरण)</title>
+  
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="Login.css">
 </head>
 <body>
-    <div class="container">
-         <div class="form-box" id="Registration">
-         <form action="">
-            <h2>Registration</h2>
-            <input type="text" name="name" placeholder="Enter Full Name">
-            <input type="tel" name="number" placeholder="Enter Aadhar/Farmer I'd">
-            <select name="role" id="">
-              <option value="">--Select Role--</option>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-              </select>
-              <button type="submit" name="login">Submit</button>
-            <p>Already have an account? <a href="Login.html">Login</a></p>
+  <div class="container">
+    <div class="form-box" id="Registration">
+      <div style="text-align:center;margin-bottom:12px;">
+        <span style="background:#dcfce7;color:#15803d;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;">
+          Smart Farmer Digital Platform
+        </span>
+      </div>
+
+      <h2>पंजीकरण (Registration)</h2>
+      <p style="font-size:13px;color:#475569;margin-bottom:18px;">
+        मंडी-X स्मार्ट किसान मंच से जुड़ें और सरकारी सुविधाओं का लाभ उठाएं।
+      </p>
+
+      <form id="regForm">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">पूरा नाम (Full Name):</label>
+        <input type="text" id="regName" name="name" placeholder="Enter Full Name" value="रामेश्वर प्रसाद" required>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">आधार / किसान आईडी (Aadhaar / Farmer ID):</label>
+        <input type="tel" id="regAadhaar" name="number" placeholder="Enter Aadhaar or Farmer ID" value="FARM-BR-2026-8942" required>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">मोबाइल नंबर (Mobile Number):</label>
+        <div style="display:flex;gap:8px;margin-bottom:20px;">
+          <input type="tel" id="regPhone" placeholder="Enter 10-digit Mobile" value="9876543210" style="margin-bottom:0;" required>
+          <button type="button" id="btnSendOtp" style="width:auto;white-space:nowrap;margin-bottom:0;padding:12px 16px;background:#0284c7;color:#fff;">
+            ओटीपी भेजें
+          </button>
+        </div>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">ओटीपी दर्ज करें (Enter OTP):</label>
+        <input type="text" id="regOtp" placeholder="Enter 4-digit OTP (उदा. 1234)" value="1234" required>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">भूमिका का चयन करें (Select Role):</label>
+        <select name="role" id="regRole" required>
+          <option value="farmer">👨‍🌾 Farmer (किसान)</option>
+          <option value="provider">🚜 Service Provider (मशीनरी/ड्रोन ऑपरेटर)</option>
+          <option value="admin">⚙️ Admin (मंडी अधिकारी / प्रशासक)</option>
+          <option value="support">🎧 Support Agent (किसान सहायक)</option>
+        </select>
+
+        <button type="submit" name="login" id="btnRegSubmit">पंजीकरण पूरा करें (Submit Registration)</button>
+        
+        <p>Already have an account? <a href="Login.html">Login Here</a></p>
+        <p style="margin-top:10px;"><a href="index.html">← Back to Platform Home</a></p>
+      </form>
     </div>
+  </div>
+
+  <script type="module">
+    import { state } from './js/state.js';
+
+    document.getElementById('btnSendOtp').addEventListener('click', () => {
+      const phone = document.getElementById('regPhone').value;
+      alert(`डेमो ओटीपी 1234 आपके मोबाइल नंबर ${phone} पर भेजा गया है।`);
+    });
+
+    document.getElementById('regForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('regName').value;
+      const aadhaar = document.getElementById('regAadhaar').value;
+      const phone = document.getElementById('regPhone').value;
+      const role = document.getElementById('regRole').value;
+
+      state.updateProfile({
+        name,
+        aadhaarId: aadhaar,
+        phone: `+91 ${phone}`
+      });
+      state.setRole(role);
+
+      alert(`बधाई! ${name}, आपका पंजीकरण सफल रहा। डैशबोर्ड पर आपका स्वागत है।`);
+      window.location.href = 'index.html#dashboard';
+    });
+  </script>
 </body>
 </html>

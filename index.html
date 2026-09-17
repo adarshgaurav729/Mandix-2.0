@@ -1,77 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIH</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MandiX - Smart Farmer Digital Platform (मंडी-X स्मार्ट किसान मंच)</title>
+
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Leaflet Map CSS CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- MandiX Primary Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-    <div id="header">
-      <div class="container">
-        <nav>
-            <img src="" class="logo">
-            <ul><a href="#">Home</a></ul>
-            <ul id="sidemanu"><a href="bookSlot.html">Book Slot</a></ul>
-            <ul class="dropdown">
-                <a href="#" class="dropdown-T">Track status</a>
 
-            <div class="dropdown-menu">
-                <a href="regis.html">Booking Status</a>
-                <a href="regis.html">Queue Status</a>
-                <a href="regis.html">Payment Status</a>
-                <a href="regis.html">Procurement Status</a>
-                
-            </div>
-            </ul>
-            <ul><a href="Login.html">Login</a></ul>
-            
-            <ul><a href="regis.html">Registration</a></ul>
-            <i id="profile" class="fa-sharp fa-solid fa-circle-user"></i>
-            
-        </nav>
-        
+  <div class="app-container">
+    <!-- Desktop Sidebar Navigation -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <i class="fa-solid fa-wheat-awn"></i>
+        </div>
+        <div class="brand-info">
+          <h2>MandiX</h2>
+          <span data-i18n="tagline">स्मार्ट किसान डिजिटल मंच</span>
+        </div>
       </div>
-       <section id="hero">
-        <div class="hero-content">
-            <h1>Smart Procurement Queue Management System</h1>
-            <p>Book your slot, track your status, get paid on time — no more long waiting lines.</p>
-            <div class="hero-buttons">
-                <a href="bookSlot.html" class="btn-primary">Book Slot Now</a>
-                <a href="regis.html" class="btn-secondary">Track My Status</a>
-            </div>
+
+      <ul class="sidebar-menu">
+        <li>
+          <a class="nav-link active" data-view="dashboard" href="#dashboard">
+            <i class="fa-solid fa-house"></i>
+            <span data-i18n="nav_dashboard">किसान डैशबोर्ड</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="weather" href="#weather">
+            <i class="fa-solid fa-cloud-sun-rain"></i>
+            <span data-i18n="nav_weather">मौसम पूर्वानुमान</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="queue" href="#queue">
+            <i class="fa-solid fa-users-line"></i>
+            <span data-i18n="nav_queue">मंडी स्लॉट व कतार</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="fertilizer" href="#fertilizer">
+            <i class="fa-solid fa-truck-ramp-box"></i>
+            <span data-i18n="nav_fertilizer">उर्वरक होम डिलीवरी</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="equipment" href="#equipment">
+            <i class="fa-solid fa-tractor"></i>
+            <span data-i18n="nav_equipment">कृषि यंत्र किराया</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="drone" href="#drone">
+            <i class="fa-solid fa-helicopter"></i>
+            <span data-i18n="nav_drone">ड्रोन सेवाएं</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="schemes" href="#schemes">
+            <i class="fa-solid fa-landmark"></i>
+            <span data-i18n="nav_schemes">सरकारी योजनाएं</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="cropGuide" href="#cropGuide">
+            <i class="fa-solid fa-seedling"></i>
+            <span data-i18n="nav_cropGuide">फसल खेती गाइड</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="beginnerGuide" href="#beginnerGuide">
+            <i class="fa-solid fa-book-open-reader"></i>
+            <span data-i18n="nav_beginnerGuide">नए किसान गाइड</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="calendar" href="#calendar">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span data-i18n="nav_calendar">फसल कैलेंडर</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="map" href="#map">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <span data-i18n="nav_map">कृषि सेवा मानचित्र</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="support" href="#support">
+            <i class="fa-solid fa-headset"></i>
+            <span data-i18n="nav_support">ग्राहक सहायता</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-view="profile" href="#profile">
+            <i class="fa-solid fa-user-gear"></i>
+            <span data-i18n="nav_profile">मेरी प्रोफाइल</span>
+          </a>
+        </li>
+        <li id="navAdminLi" style="display:none;">
+          <a class="nav-link" data-view="admin" href="#admin" style="color:#facc15;">
+            <i class="fa-solid fa-gauge-high" style="color:#facc15;"></i>
+            <span data-i18n="nav_admin">प्रशासन पैनल</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-card" onclick="window.mandixApp.navigate('profile')">
+          <div class="user-avatar">र</div>
+          <div class="user-details">
+            <h4>रामेश्वर प्रसाद</h4>
+            <p>चकिया, पूर्वी चंपारण</p>
+          </div>
         </div>
-    </section>
+      </div>
+    </aside>
+
+    <!-- Main Content Application Shell -->
+    <main class="app-main">
+      <!-- Top Sticky Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <button class="btn-sidebar-toggle" id="sidebarToggleBtn" aria-label="Toggle Navigation Menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="header-location-pill">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>चकिया, पूर्वी चंपारण (Chakia, Bihar)</span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Role Selector for easy evaluation of all features -->
+          <select id="roleSwitcher" class="role-select" title="भूमिका बदलें (Switch Role for demo)">
+            <option value="farmer">👨‍🌾 Farmer (किसान)</option>
+            <option value="provider">🚜 Service Provider</option>
+            <option value="admin">⚙️ Admin (प्रशासक)</option>
+            <option value="support">🎧 Support Agent</option>
+          </select>
+
+          <!-- Language Selector for 13 Indian Languages -->
+          <div class="lang-selector-wrapper">
+            <select class="lang-select lang-select-elem" title="भाषा चुनें (Select Language)">
+              <!-- Populated via js/translations.js -->
+            </select>
+          </div>
+
+          <!-- Accessibility: High Contrast Toggle -->
+          <button class="header-btn" id="contrastToggleBtn" title="उच्च कंट्रास्ट मोड (High Contrast Toggle)" aria-label="High Contrast">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+          </button>
+
+          <!-- Accessibility: Font Size Scale -->
+          <button class="header-btn" id="fontScaleBtn" title="फॉन्ट आकार बदलें (Change Font Size)" aria-label="Font Size">
+            <i class="fa-solid fa-font"></i>
+          </button>
+
+          <!-- Notifications Button with Badge -->
+          <button class="header-btn" id="notificationBtn" title="सूचनाएं (Notifications)" aria-label="Notifications">
+            <i class="fa-solid fa-bell"></i>
+            <span class="notification-badge" id="notificationBadge"></span>
+          </button>
+
+          <!-- Standalone Page Direct Links (Preserves SIH routes) -->
+          <a href="bookSlot.html" class="btn btn-primary btn-sm" style="margin-left:6px;">
+            <i class="fa-solid fa-ticket"></i> <span data-i18n="btn_bookSlot">स्लॉट बुक करें</span>
+          </a>
+          <a href="Login.html" class="header-btn" title="लॉग इन" style="text-decoration:none;">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          </a>
+        </div>
+      </header>
+
+      <!-- Dynamic Page View Container -->
+      <section class="app-view" id="mainViewContainer">
+        <!-- Injected dynamically by js/app.js -->
+      </section>
+
+      <!-- Reusable Footer -->
+      <footer style="background:#0f4024;color:#e2e8f0;padding:24px;text-align:center;font-size:12.5px;border-top:1px solid rgba(255,255,255,0.1);margin-top:auto;">
+        <p style="font-weight:600;color:#fff;">Department of Consumer Affairs, Food & Public Distribution | Smart India Hackathon 2026</p>
+        <p style="margin:4px 0;opacity:0.85;">Made By NexGenX Team with ANANYA <i class="fa-solid fa-heart" style="color:#ddd1d1;"></i></p>
+        <p style="font-size:11px;opacity:0.65;margin-top:6px;">मंडी-X एक सुरक्षित, आधुनिक और बहुभाषी डिजिटल कृषि सेवा मंच है।</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <a class="mobile-nav-item active" data-view="dashboard" href="#dashboard">
+      <i class="fa-solid fa-house"></i>
+      <span data-i18n="nav_home">होम</span>
+    </a>
+    <a class="mobile-nav-item" data-view="weather" href="#weather">
+      <i class="fa-solid fa-cloud-sun"></i>
+      <span data-i18n="nav_weather">मौसम</span>
+    </a>
+    <a class="mobile-nav-item" data-view="queue" href="#queue">
+      <i class="fa-solid fa-ticket"></i>
+      <span data-i18n="nav_queue">टोकन</span>
+    </a>
+    <a class="mobile-nav-item" data-view="fertilizer" href="#fertilizer">
+      <i class="fa-solid fa-truck-fast"></i>
+      <span data-i18n="nav_fertilizer">खाद</span>
+    </a>
+    <a class="mobile-nav-item" data-view="support" href="#support">
+      <i class="fa-solid fa-headset"></i>
+      <span data-i18n="nav_support">मदद</span>
+    </a>
+  </nav>
+
+  <!-- Floating Large Voice Assistant Button -->
+  <button class="floating-voice-btn" id="floatingVoiceBtn" title="किसान वाणी AI वॉइस असिस्टेंट से पूछें">
+    <i class="fa-solid fa-microphone"></i>
+  </button>
+
+  <!-- Generic Reusable Modal Container -->
+  <div class="modal-overlay" id="genericModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">संवाद (Dialog)</h3>
+        <button class="btn-modal-close" id="modalCloseBtn" aria-label="Close Dialog">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Content injected dynamically -->
+      </div>
     </div>
-   
+  </div>
 
-    <!------------------------- About Section --------->
-    <section id="about">
-        <div class="container">
-            <h2>About This Platform</h2>
-            <p>This platform helps farmers book procurement slots online, track real-time queue status, and receive instant updates on payment and procurement — reducing waiting time at centres and bringing transparency to the process.</p>
-        </div>
-    </section>
+  <!-- Leaflet Map JS CDN -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+  <!-- MandiX Main Application Script (ES Module) -->
+  <script type="module" src="js/app.js"></script>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2>Need Help?</h2>
-            <p>Helpline Number: 1800-XXX-XXXX</p>
-            <p>Find your nearest procurement centre or check our FAQs for common questions.</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>Department of Consumer Affairs, Food ; Public Distribution</p>
-            <p class="disclaimer">This is a prototype developed for Smart India Hackathon 2026.</p>
-            <p>Made By NexGenX Team <i class="fa-sharp-duotone fa-solid fa-copyright"></i>|| With <i class="fa-duotone fa-solid fa-heart"> </i></p>
-        </div>
-    </footer>
-    
 </body>
 </html>

@@ -1,50 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slot-Boking</title>
-    <link rel="stylesheet" href="Login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MandiX - Slot Booking (मंडी खरीद स्लॉट बुकिंग)</title>
+  
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="Login.css">
 </head>
 <body>
-       <div class="container">
-         <div class="form-box" id="Registration">
-         <form action="">
-            <h2>Slot Booking</h2>
-            <input type="text" name="name" placeholder="Enter Full Name">
-            <input type="tel" name="number" placeholder="Farmer I'd">
-            <select name="State" id="">
-              <option value="">--Select State--</option>
-              <option value="">Andhra pradesh</option>
-              <option value="">Arunachal Pradesh</option>
-              <option value="">Assam</option>
-              <option value="">Bihar</option>
-              <option value="">Chhattisghar</option>
-              <option value="">Gao</option>
-              <option value="">Gujarat</option>
-              <option value="">Haryana</option>
-              <option value="">Himachal pradesh</option>
-              <option value="">jharkhand</option>
-            </select>
-            <select  id="">
-                <option value="">--slect Distric--</option>
-                <option value="">East Champaran</option>
-                 <option value="">West Champaran</option>
-                <option value="">Muzaffarpur</option>
-                <option value="">Samastipur</option>
-                <option value="">Saran</option>
-            </select>
-              <select  id="">
-                <option value="">--slect Block--</option>
-                <option value="">Chakia</option>
-                 <option value="">Shahebganj</option>
-                <option value="">Kalyanpur</option>
-                <option value="">Pipra</option>
-                <option value="">Mehsi</option>
-            </select>
-              <button type="submit" name="login">Get Token</button>
-            <p>You also Get Token on you'r SMS<a href="index.html">To Home</a></p>
+  <div class="container">
+    <div class="form-box" id="Registration">
+      <div style="text-align:center;margin-bottom:14px;">
+        <span style="background:#dcfce7;color:#15803d;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;">
+          Smart India Hackathon 2026
+        </span>
+      </div>
 
+      <h2>मंडी खरीद स्लॉट बुकिंग (Slot Booking)</h2>
+      <p style="font-size:13px;color:#475569;margin-bottom:18px;">
+        सरकारी उपार्जन केंद्र पर कतार में खड़े होने की आवश्यकता नहीं। डिजिटल टोकन पाएं और समय पर पहुंचें।
+      </p>
+
+      <form id="standaloneSlotForm">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">किसान का पूरा नाम (Full Name):</label>
+        <input type="text" id="sbName" name="name" placeholder="Enter Full Name" value="रामेश्वर प्रसाद" required>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">किसान आईडी / आधार नंबर (Farmer ID):</label>
+        <input type="tel" id="sbFarmerId" name="number" placeholder="Enter Farmer ID / Aadhaar" value="FARM-BR-2026-8942" required>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">राज्य चुनें (Select State):</label>
+        <select name="State" id="sbState" required>
+          <option value="Bihar">Bihar (बिहार)</option>
+          <option value="Punjab">Punjab (पंजाब)</option>
+          <option value="Haryana">Haryana (हरियाणा)</option>
+          <option value="Maharashtra">Maharashtra (महाराष्ट्र)</option>
+          <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <option value="Madhya Pradesh">Madhya Pradesh</option>
+        </select>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">जिला चुनें (Select District):</label>
+        <select id="sbDistrict" required>
+          <option value="East Champaran">East Champaran (पूर्वी चंपारण)</option>
+          <option value="West Champaran">West Champaran</option>
+          <option value="Muzaffarpur">Muzaffarpur</option>
+          <option value="Samastipur">Samastipur</option>
+          <option value="Saran">Saran</option>
+          <option value="Patna">Patna</option>
+        </select>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">प्रखंड चुनें (Select Block):</label>
+        <select id="sbBlock" required>
+          <option value="Chakia">Chakia (चकिया)</option>
+          <option value="Shahebganj">Shahebganj</option>
+          <option value="Kalyanpur">Kalyanpur</option>
+          <option value="Pipra">Pipra</option>
+          <option value="Mehsi">Mehsi</option>
+        </select>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">उपज / फसल प्रकार (Crop):</label>
+        <select id="sbCrop" required>
+          <option value="Wheat">गेहूं (Wheat Grade-A @ ₹2275/Qtl)</option>
+          <option value="Paddy (Grade A)">धान (Paddy Grade-A @ ₹2203/Qtl)</option>
+          <option value="Mustard">सरसों (Mustard @ ₹5650/Qtl)</option>
+          <option value="Maize">मक्का (Maize @ ₹2090/Qtl)</option>
+        </select>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">अनुमानित मात्रा (क्विंटल में):</label>
+        <input type="number" id="sbQty" min="1" max="500" value="40" required>
+
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">पसंदीदा तारीख:</label>
+        <input type="date" id="sbDate" required>
+
+        <button type="submit" name="login" id="btnSubmitSlot">टोकन प्राप्त करें (Get Token)</button>
+      </form>
+
+      <div id="slotSuccessBox" style="display:none;background:#dcfce7;border:1.5px solid #16a34a;border-radius:8px;padding:16px;text-align:center;margin-top:16px;">
+        <i class="fa-solid fa-circle-check" style="font-size:32px;color:#15803d;margin-bottom:8px;"></i>
+        <h3 style="color:#14532d;font-size:18px;">टोकन सफलतापूर्वक जारी हुआ!</h3>
+        <div id="tokenNumDisplay" style="font-size:28px;font-weight:900;color:#15803d;margin:8px 0;letter-spacing:1px;"></div>
+        <p id="tokenDetailsDisplay" style="font-size:13px;color:#166534;margin-bottom:12px;"></p>
+        <a href="index.html#queue" class="btn-token-link" style="display:inline-block;background:#16a34a;color:#fff;text-decoration:none;padding:10px 18px;border-radius:6px;font-weight:600;font-size:13px;">
+          डैशबोर्ड पर लाइव कतार ट्रैक करें (Track Live Queue)
+        </a>
+      </div>
+
+      <p style="margin-top:16px;">You will also get your token via SMS alert. <a href="index.html">← Back to Platform Home</a></p>
     </div>
+  </div>
+
+  <script type="module">
+    import { generateToken } from './js/procurement-service.js';
+    import { DISTRICT_BLOCK_DATA } from './js/procurement-service.js';
+
+    document.getElementById('sbDate').value = new Date().toISOString().split('T')[0];
+
+    const stateSel = document.getElementById('sbState');
+    const distSel = document.getElementById('sbDistrict');
+    const blockSel = document.getElementById('sbBlock');
+
+    stateSel.addEventListener('change', () => {
+      const st = stateSel.value;
+      const dists = DISTRICT_BLOCK_DATA[st] || {};
+      distSel.innerHTML = '';
+      Object.keys(dists).forEach(d => {
+        const opt = document.createElement('option');
+        opt.value = d;
+        opt.textContent = d;
+        distSel.appendChild(opt);
+      });
+      distSel.dispatchEvent(new Event('change'));
+    });
+
+    distSel.addEventListener('change', () => {
+      const st = stateSel.value;
+      const d = distSel.value;
+      const blocks = (DISTRICT_BLOCK_DATA[st] && DISTRICT_BLOCK_DATA[st][d]) || ['Block Center #1'];
+      blockSel.innerHTML = '';
+      blocks.forEach(b => {
+        const opt = document.createElement('option');
+        opt.value = b;
+        opt.textContent = b;
+        blockSel.appendChild(opt);
+      });
+    });
+
+    document.getElementById('standaloneSlotForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('sbName').value;
+      const id = document.getElementById('sbFarmerId').value;
+      const st = document.getElementById('sbState').value;
+      const dist = document.getElementById('sbDistrict').value;
+      const block = document.getElementById('sbBlock').value;
+      const crop = document.getElementById('sbCrop').value;
+      const qty = document.getElementById('sbQty').value;
+      const date = document.getElementById('sbDate').value;
+
+      const token = generateToken(name, id, st, dist, block, crop, qty, date, '10:30 AM - 11:30 AM');
+
+      document.getElementById('standaloneSlotForm').style.display = 'none';
+      document.getElementById('tokenNumDisplay').textContent = token.tokenNumber;
+      document.getElementById('tokenDetailsDisplay').textContent = `${token.centerName} | समय: 10:30 AM | काउंटर: ${token.counterNo} | अनुमानित प्रतीक्षा: ~${token.estimatedWaitMin} मिनट`;
+      document.getElementById('slotSuccessBox').style.display = 'block';
+    });
+  </script>
 </body>
 </html>
