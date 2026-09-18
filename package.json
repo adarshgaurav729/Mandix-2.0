@@ -1,17 +1,18 @@
 {
   "name": "mandix-smart-farmer-platform",
-  "version": "1.0.0",
-  "description": "Smart Farmer Digital Platform (SIH 2026)",
+  "version": "2.0.0",
+  "description": "Smart Farmer Digital Platform (SIH 2026) with MySQL Backend",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
   },
   "keywords": [
     "farmer",
     "agriculture",
     "sih",
     "mandix",
+    "mysql",
     "smart-procurement"
   ],
   "author": "NexGenX Team",

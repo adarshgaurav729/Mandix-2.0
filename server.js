@@ -33,7 +33,7 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  // Set CORS headers so all modules load without restrictions
+  // Set CORS headers 
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');

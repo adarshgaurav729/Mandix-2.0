@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>MandiX 2.0 - Tech Stack & Architecture Report</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+    @page {
+      size: A4;
+      margin: 18mm 15mm 18mm 15mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', -apple-system, sans-serif;
+    }
+
+    body {
+      color: #1e293b;
+      background: #ffffff;
+      line-height: 1.6;
+      font-size: 13px;
+    }
+
+    .header-banner {
+      background: linear-gradient(135deg, #052e16 0%, #15803d 60%, #16a34a 100%);
+      color: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-title h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .header-title p {
+      font-size: 13px;
+      color: #bbf7d0;
+      margin-top: 4px;
+    }
+
+    .header-badge {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-align: right;
+      font-size: 11px;
+    }
+
+    .section-heading {
+      font-size: 16px;
+      font-weight: 700;
+      color: #14532d;
+      border-bottom: 2px solid #86efac;
+      padding-bottom: 6px;
+      margin: 20px 0 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tech-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 5px solid #16a34a;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      page-break-inside: avoid;
+    }
+
+    .tech-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .tech-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .tech-tag {
+      background: #dcfce7;
+      color: #166534;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 12px;
+    }
+
+    .tech-desc {
+      font-size: 12.5px;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    .tech-detail {
+      font-size: 12px;
+      background: #ffffff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px dashed #cbd5e1;
+      color: #475569;
+    }
+
+    .tech-detail b {
+      color: #15803d;
+    }
+
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 12px;
+      page-break-inside: avoid;
+    }
+
+    .summary-table th {
+      background: #14532d;
+      color: #ffffff;
+      text-align: left;
+      padding: 8px 12px;
+    }
+
+    .summary-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .summary-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 11px;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 10px;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Banner -->
+  <div class="header-banner">
+    <div class="header-title">
+      <h1>MandiX 2.0 - Smart Farmer Digital Platform</h1>
+      <p>Technology Stack & Architecture Report (तकनीकी विवरण एवं उपयोगिता)</p>
+    </div>
+    <div class="header-badge">
+      <strong>Smart India Hackathon 2026</strong><br>
+      Team: NexGenX
+    </div>
+  </div>
+
+  <p style="font-size: 13px; color: #475569; margin-bottom: 16px;">
+    इस दस्तावेज़ में <b>MandiX 2.0</b> में उपयोग की गई सभी तकनीकों (Technologies), टूल्स, और एपीआई (APIs) का विस्तृत विवरण दिया गया है कि <b>वे क्या करती हैं (What They Do)</b> और प्लेटफ़ॉर्म में उनकी क्या भूमिका है।
+  </p>
+
+  <!-- 1. Frontend Core -->
+  <div class="section-heading">
+    🌐 1. कोर वेब टेक्नोलॉजीज (Core Frontend Architecture)
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-header">
+      <span class="tech-name">1. HTML5 (Semantic Markup)</span>
+      <span class="tech-tag">Structure</span>
+    </div>
+    <p class="tech-desc"><b>यह क्या करता है:</b> पूरी वेबसाइट का आधारभूत ढांचा (Skeleton) तैयार करता है।</p>
+    <div class="tech-detail">
+      <b>प्रोजेक्ट में उपयोग:</b> सिमेंटिक टैग्स (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;section&gt;</code>) का उपयोग किया गया है, जिससे स्क्रीन-रीडर्स और कम दृष्टि वाले किसानों के लिए एक्सेसिबिलिटी (Accessibility) मजबूत होती है।
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-header">
+      <span class="tech-name">2. CSS3 (Custom Variables, Flexbox & Grid)</span>
+      <span class="tech-tag">Styling & Responsive</span>
+    </div>
+    <p class="tech-desc"><b>यह क्या करता है:</b> वेबसाइट को आकर्षक, हरा-भरा (Agricultural Green Theme), और पूरी तरह रेस्पॉन्सिव बनाता है।</p>
+    <div class="tech-detail">
+      <b>प्रोजेक्ट में उपयोग:</b> <code>main.css</code> और <code>components.css</code> के जरिए डेस्कटॉप साइडबार, मोबाइल बॉटम नेविगेशन बार, हाई-कंट्रास्ट मोड (High Contrast Mode), फॉन्ट स्केलिंग (A- / A / A+), और 4-स्टेप डिलीवरी ट्रैकर का सुंदर यूआई तैयार किया गया है।
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-header">
+      <span class="tech-name">3. Vanilla JavaScript (ES6+ Modular Architecture)</span>
+      <span class="tech-tag">Logic & Interactivity</span>
+    </div>
+    <p class="tech-desc"><b>यह क्या करता है:</b> बिना किसी भारी फ्रेमवर्क (जैसे React या Angular) के वेबसाइट को सुपर-फास्ट और इंटरैक्टिव बनाता है।</p>
+    <div class="tech-detail">
+      <b>प्रोजेक्ट में उपयोग:</b> ES6 मॉड्यूल्स (<code>import/export</code>) द्वारा 14 अलग-अलग सर्विस फाइल्स बनाई गई हैं (जैसे <code>weather-service.js</code>, <code>fertilizer-service.js</code>, <code>drone-service.js</code>), जिससे कोड मेंटेन करना और स्केल करना बहुत आसान है।
+    </div>
+  </div>
+
+  <!-- 2. AI & Interactive APIs -->
+  <div class="section-heading">
+    🎙️ 2. आर्टिफिशियल इंटेलिजेंस एवं वॉयस टेक्नोलॉजी (AI & Voice Assistant)
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-header">
+      <span class="tech-name">4. Web Speech API (SpeechRecognition & SpeechSynthesis)</span>
+      <span class="tech-tag">AI Voice Engine</span>
+    </div>
+    <p class="tech-desc"><b>यह क्या करता है:</b> किसान वाणी (Kisan Vani) वॉयस असिस्टेंट को आवाज पहचानने और उत्तर बोलकर सुनाने की ताकत देता है।</p>
+    <div class="tech-detail">
+      <b>प्रोजेक्ट में उपयोग:</b> 
+      <br>• <b>Speech-to-Text (STT):</b> किसान जब माइक बटन दबाकर हिंदी या इंग्लिश में पूछता है (उदा. <i>"गेहूं में पत्तियां पीली हो रही हैं, क्या करूं?"</i>), तो यह आवाज को तुरंत टेक्स्ट में बदलता है।
+      <br>• <b>Text-to-Speech (TTS):</b> समाधान तैयार होने के बाद यह नेचुरल आवाज़ में उत्तर बोलकर सुनाता है ताकि निरक्षर किसान भी सुनकर लाभ उठा सकें। इसमें "दोबारा सुनें (Replay)" का विकल्प भी है।
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- 3. Mapping & Live APIs -->
+  <div class="section-heading">
+    🗺️ 3. जीआईएस मैपिंग एवं लाइव एपीआई (GIS Maps & APIs)
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-header">
+      <span class="tech-name">5. Leaflet.js & OpenStreetMap</span>
+      <span class="tech-tag">Interactive GIS Map</span>
+    </div>
+    <p class="tech-desc"><b>यह क्या करता है:</b> ओपन-सोर्स, बिना किसी पेड API Key के इंटरैक्टिव कृषि मानचित्र प्रदर्शित करता है।</p>
+    <div class="tech-detail">
+      <b>प्रोजेक्ट में उपयोग:</b> किसान के गांव का केंद्र (गोपनीयता सुरक्षित रखते हुए), निकटतम सरकारी उपार्जन केंद्र (Mandi), IFFCO खाद डिपो, ट्रैक्टर कस्टम हायरिंग सेंटर और ड्रोन हब को कस्टम रंगीन मार्करों के साथ मैप पर दिखाता है।
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-header">
+      <span class="tech-name">6. Open-Meteo REST API</span>
+      <span class="tech-tag">Live Weather Engine</span>
+    </div>
+    <p class="tech-desc"><b>यह क्या करता है:</b> भारत के किसी भी जिले/गांव का रियल-टाइम लाइव मौसम डेटा मुफ्त और बिना एपीआई-की के फेच करता है।</p>
+    <div class="tech-detail">
+      <b>प्रोजेक्ट में उपयोग:</b> तापमान, बारिश की संभावना, हवा की गति, आर्द्रता और 7-दिन का पूर्वानुमान लाता है। साथ ही इसके आधार पर <b>एग्रो-एडवाइजरी</b> (सिंचाई कब करें, कीटनाशक कब छिड़कें, पाला चेतावनी) अपने आप उत्पन्न होती है।
+    </div>
+  </div>
+
+  <!-- 4. State & Localization -->
+  <div class="section-heading">
+    💾 4. स्टेट मैनेजमेंट, बहुभाषा एवं डेटा (State & Multi-Language)
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-header">
+      <span class="tech-name">7. Client-Side State Manager & LocalStorage Persistence</span>
+      <span class="tech-tag">Data Store</span>
+    </div>
+    <p class="tech-desc"><b>यह क्या करता है:</b> किसान के डेटा को ब्राउज़र में सुरक्षित रूप से सहेजता है और लाइव अपडेट करता है।</p>
+    <div class="tech-detail">
+      <b>प्रोजेक्ट में उपयोग:</b> किसान प्रोफाइल, सक्रिय खरीद टोकन (#TK-142), खाद के ऑर्डर, ट्रैक्टर रेंटल बुकिंग, ड्रोन अनुरोध और सपोर्ट टिकटों को ब्राउज़र में स्टोर रखता है ताकि पेज बंद करने के बाद भी डेटा सुरक्षित रहे।
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-header">
+      <span class="tech-name">8. Scalable Localization Engine (13 Indian Languages)</span>
+      <span class="tech-tag">Multilingual i18n</span>
+    </div>
+    <p class="tech-desc"><b>यह क्या करता है:</b> पूरी वेबसाइट को 13 भारतीय भाषाओं में तुरंत अनुवादित करता है।</p>
+    <div class="tech-detail">
+      <b>प्रोजेक्ट में उपयोग:</b> हिंदी, English, मराठी, गुजराती, पंजाबी, बंगाली, तमिल, तेलुगु, कन्नड़, मलयालम, ओडिया, असमिया और उर्दू। बिना पेज रीलोड किए सभी नेविगेशन, बटन, फॉर्म और योजनाओं की भाषा तुरंत बदल जाती है।
+    </div>
+  </div>
+
+  <!-- 5. Server & Hosting -->
+  <div class="section-heading">
+    ⚙️ 5. सर्वर, टूल्स एवं डिप्लॉयमेंट (Server & Deployment)
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-header">
+      <span class="tech-name">9. Node.js Native HTTP Server (server.js)</span>
+      <span class="tech-tag">Local Dev Server</span>
+    </div>
+    <p class="tech-desc"><b>यह क्या करता है:</b> बिना किसी थर्ड-पार्टी पैकेज के लोकेल कंप्यूटर पर सर्वर चलाता है।</p>
+    <div class="tech-detail">
+      <b>प्रोजेक्ट में उपयोग:</b> ब्राउज़र के <code>file://</code> CORS एरर को हल करने के लिए बनाया गया। यह सही MIME टाइप्स और <code>Access-Control-Allow-Origin: *</code> हेडर्स के साथ <code>http://localhost:3000</code> पर वेबसाइट को सर्व करता है।
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-header">
+      <span class="tech-name">10. Git & GitHub Pages</span>
+      <span class="tech-tag">Version Control & Cloud Hosting</span>
+    </div>
+    <p class="tech-desc"><b>यह क्या करता है:</b> कोड का वर्जन कंट्रोल रखता है और वेबसाइट को इंटरनेट पर फ्री में लाइव होस्ट करता है।</p>
+    <div class="tech-detail">
+      <b>प्रोजेक्ट में उपयोग:</b> संपूर्ण प्रोजेक्ट को <code>https://github.com/adarshgaurav729/Mandix-2.0.git</code> पर पुश किया गया है और यह GitHub Pages पर बिना किसी बैकएंड सर्वर के लाइव चलने के लिए 100% तैयार है।
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="tech-header">
+      <span class="tech-name">11. FontAwesome 6 Icons</span>
+      <span class="tech-tag">UI / UX Iconography</span>
+    </div>
+    <p class="tech-desc"><b>यह क्या करता है:</b> आकर्षक और समझने में आसान विज़ुअल सिंबल प्रदान करता है।</p>
+    <div class="tech-detail">
+      <b>प्रोजेक्ट में उपयोग:</b> ट्रैक्टर, ड्रोन, फसल, मौसम, टोकन, खाद और माइक के स्पष्ट आइकन लगाए गए हैं ताकि कम साक्षर किसान भी देखकर तुरंत समझ सकें।
+    </div>
+  </div>
+
+  <!-- Summary Table -->
+  <div class="section-heading">
+    📊 6. तकनीकी सारांश तालिका (Summary Table)
+  </div>
+
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>तकनीक (Technology)</th>
+        <th>श्रेणी (Category)</th>
+        <th>मुख्य कार्य (Primary Function)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>HTML5</b></td>
+        <td>Frontend Markup</td>
+        <td>वेबसाइट का सिमेंटिक स्ट्रक्चर और स्क्रीन-रीडर एक्सेसिबिलिटी</td>
+      </tr>
+      <tr>
+        <td><b>CSS3</b></td>
+        <td>Styling & Design</td>
+        <td>कृषि थीम, रेस्पॉन्सिव ग्रिड, हाई कंट्रास्ट और फॉन्ट स्केलिंग</td>
+      </tr>
+      <tr>
+        <td><b>JavaScript (ES6+)</b></td>
+        <td>Scripting & Logic</td>
+        <td>मॉड्यूलर सर्विस लेयर, इंटरएक्टिविटी और क्लाइंट-साइड राउटिंग</td>
+      </tr>
+      <tr>
+        <td><b>Web Speech API</b></td>
+        <td>Speech AI (STT/TTS)</td>
+        <td>किसान वाणी वॉयस असिस्टेंट (बोलकर पूछना व सुनकर समझना)</td>
+      </tr>
+      <tr>
+        <td><b>Leaflet & OpenStreetMap</b></td>
+        <td>GIS Mapping</td>
+        <td>मंडी, खाद केंद्र, उपकरण हब और ड्रोन क्लस्टर का लाइव मैप</td>
+      </tr>
+      <tr>
+        <td><b>Open-Meteo API</b></td>
+        <td>Weather REST API</td>
+        <td>7-दिवसीय लाइव मौसम पूर्वानुमान एवं वैज्ञानिक कृषि परामर्श</td>
+      </tr>
+      <tr>
+        <td><b>LocalStorage & State</b></td>
+        <td>Data Store</td>
+        <td>टोकन, खाद ऑर्डर, उपकरण बुकिंग और किसान प्रोफाइल स्टोरेज</td>
+      </tr>
+      <tr>
+        <td><b>i18n Localization</b></td>
+        <td>Multi-Language</td>
+        <td>13 भारतीय भाषाओं में तुरंत और निर्बाध अनुवाद</td>
+      </tr>
+      <tr>
+        <td><b>Node.js (server.js)</b></td>
+        <td>Local Dev Server</td>
+        <td>CORS एरर मुक्त लोकल होस्टिंग (http://localhost:3000)</td>
+      </tr>
+      <tr>
+        <td><b>GitHub Pages</b></td>
+        <td>Cloud Hosting</td>
+        <td>पब्लिक यूआरएल पर लाइव फ्री डिप्लॉयमेंट</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer-note">
+    MandiX 2.0 • Smart Farmer Digital Platform • Developed by NexGenX Team for Smart India Hackathon 2026
+  </div>
+
+</body>
+</html>

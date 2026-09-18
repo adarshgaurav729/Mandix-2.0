@@ -1,5 +1,8 @@
 @echo off
-title MandiX Smart Farmer Digital Platform Server
-echo Starting MandiX Local Server...
+title MandiX Express + MySQL Backend Server
+echo ========================================================
+echo Starting MandiX Backend Server (Node.js + Express + MySQL)
+echo ========================================================
+cd /d "%~dp0server"
 node server.js
 pause

@@ -1,9 +1,11 @@
 /**
  * MandiX - Administrator Management & Analytics Service
  * Admin control dashboard, order status toggles, ticket manager, and platform KPIs.
+ * Connected to MySQL REST backend.
  */
 
 import { state } from './state.js';
+import { api } from './api.js';
 
 export const ADMIN_STATS = {
   totalFarmers: 12480,
@@ -24,13 +26,20 @@ export const MOCK_FARMERS_LIST = [
 ];
 
 export function updateOrderStatus(orderId, newStatus) {
+  let dbId = null;
   const orders = state.getOrders().map(o => {
     if (o.id === orderId) {
+      dbId = o.dbId || parseInt(orderId.replace('FD-', ''), 10);
       return { ...o, status: newStatus };
     }
     return o;
   });
   state.save('mandix_fertilizer_orders', orders);
+
+  // Sync with MySQL backend
+  if (dbId) {
+    api.updateFertilizerOrderStatus(dbId, newStatus);
+  }
 
   // Notification for farmer
   const notifications = state.getNotifications();
@@ -47,11 +56,18 @@ export function updateOrderStatus(orderId, newStatus) {
 }
 
 export function updateTicketStatus(ticketId, newStatus) {
+  let dbId = null;
   const tickets = state.getTickets().map(t => {
     if (t.id === ticketId) {
+      dbId = t.dbId || parseInt(ticketId.replace('TCK-', ''), 10);
       return { ...t, status: newStatus };
     }
     return t;
   });
   state.save('mandix_support_tickets', tickets);
+
+  // Sync with MySQL backend
+  if (dbId) {
+    api.updateSupportTicketStatus(dbId, newStatus);
+  }
 }

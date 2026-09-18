@@ -1,7 +1,9 @@
 /**
  * MandiX - Central State Manager
- * Handles persistent state via localStorage and event publishing for UI updates.
+ * Integrated with MySQL REST API (http://localhost:3000/api) and LocalStorage fallback.
  */
+
+import { api } from './api.js';
 
 const STORAGE_KEYS = {
   LANG: 'mandix_lang',
@@ -18,6 +20,7 @@ const STORAGE_KEYS = {
 };
 
 const DEFAULT_PROFILE = {
+  id: 1,
   name: 'रामेश्वर प्रसाद (Rameshwar Prasad)',
   phone: '+91 98765 43210',
   aadhaarId: 'FARM-BR-2026-8942',
@@ -73,6 +76,7 @@ class StateManager {
   constructor() {
     this.subscribers = {};
     this.init();
+    this.syncFromBackend();
   }
 
   init() {
@@ -106,7 +110,7 @@ class StateManager {
           orderDate: '2026-09-16',
           deliverySlot: 'Morning (09:00 - 12:00)',
           address: 'Village Chakia, Near Primary School, East Champaran, Bihar - 845412',
-          status: 'Dispatched', // Ordered -> Confirmed -> Dispatched -> Delivered
+          status: 'Dispatched',
           isDemo: true
         }
       ]);
@@ -151,7 +155,7 @@ class StateManager {
           id: 'TCK-201',
           subject: 'मंडी स्लॉट समय में संशोधन (Reschedule Mandi Slot)',
           category: 'Mandi Queue / Procurement',
-          status: 'In Progress', // Open, In Progress, Resolved
+          status: 'In Progress',
           createdAt: '2026-09-17 10:15 AM',
           description: 'भारी बारिश के कारण टोकन संख्या #TK-142 का समय दोपहर 2:00 बजे करने का अनुरोध।',
           responses: [
@@ -192,6 +196,139 @@ class StateManager {
         mspPerQtl: 2275,
         totalExpectedAmt: 102375
       });
+    }
+  }
+
+  /**
+   * Asynchronously sync state from MySQL backend via REST API
+   */
+  async syncFromBackend() {
+    try {
+      // 1. Check farmers
+      const farmersRes = await api.getFarmers();
+      if (farmersRes && farmersRes.success && farmersRes.data.length > 0) {
+        const f = farmersRes.data[0];
+        const profile = {
+          id: f.id,
+          name: f.name,
+          phone: f.phone,
+          aadhaarId: `FARM-BR-2026-8942`,
+          village: f.village,
+          district: f.district,
+          state: f.state,
+          farmSize: f.farm_size || '4.5 Acres',
+          soilType: f.soil_type || 'Alluvial Soil',
+          primaryCrop: f.primary_crop || 'Wheat & Paddy'
+        };
+        this.save(STORAGE_KEYS.PROFILE, profile);
+      }
+
+      // 2. Check Queue
+      const queueRes = await api.getQueue();
+      if (queueRes && queueRes.success && queueRes.data.length > 0) {
+        const q = queueRes.data[0];
+        const activeToken = {
+          tokenNumber: q.token_number,
+          farmerName: q.farmer_name || 'रामेश्वर प्रसाद',
+          farmerId: `FARM-BR-${q.farmer_id}`,
+          crop: q.crop || 'Wheat Grade-A',
+          quantityQtl: parseFloat(q.quantity_qtl) || 40,
+          state: q.state || 'Bihar',
+          district: q.district || 'East Champaran',
+          block: q.village || 'Chakia',
+          centerName: q.mandi_name,
+          slotDate: q.slot_date ? q.slot_date.split('T')[0] : '2026-09-18',
+          slotTime: q.slot_time,
+          currentServing: 'TK-138',
+          estimatedWaitMin: 25,
+          counterNo: 'Counter 3',
+          status: q.status,
+          paymentStatus: 'Aadhaar PFMS Verified - Ready for MSP transfer',
+          mspPerQtl: 2275,
+          totalExpectedAmt: 102375
+        };
+        this.save(STORAGE_KEYS.ACTIVE_TOKEN, activeToken);
+      }
+
+      // 3. Check Fertilizer Orders
+      const ordersRes = await api.getFertilizerOrders();
+      if (ordersRes && ordersRes.success && ordersRes.data.length > 0) {
+        const orders = ordersRes.data.map(o => ({
+          id: `FD-${o.id}`,
+          dbId: o.id,
+          productName: o.item_name,
+          category: o.category || 'Urea',
+          quantity: o.quantity,
+          unitPrice: parseFloat(o.unit_price) || 266.5,
+          totalPrice: parseFloat(o.total_price) || (o.quantity * 266.5),
+          orderDate: o.created_at ? o.created_at.split('T')[0] : '2026-09-16',
+          deliverySlot: o.delivery_slot || 'Morning (09:00 - 12:00)',
+          address: o.address,
+          status: o.status,
+          isDemo: false
+        }));
+        this.save(STORAGE_KEYS.ORDERS, orders);
+      }
+
+      // 4. Check Equipment Bookings
+      const eqRes = await api.getEquipmentBookings();
+      if (eqRes && eqRes.success && eqRes.data.length > 0) {
+        const bookings = eqRes.data.map(b => ({
+          id: `EQ-${b.id}`,
+          dbId: b.id,
+          equipmentName: b.equipment_name,
+          category: b.category || 'Tractor',
+          provider: b.provider || 'Kisan Seva Kendra, Chakia',
+          startDate: b.booking_date ? b.booking_date.split('T')[0] : '2026-09-20',
+          duration: b.duration || '1 Day',
+          rateType: 'daily',
+          rate: parseFloat(b.total_cost) || 1800,
+          total: parseFloat(b.total_cost) || 1800,
+          operatorRequired: Boolean(b.operator_required),
+          status: b.status,
+          isDemo: false
+        }));
+        this.save(STORAGE_KEYS.BOOKINGS, bookings);
+      }
+
+      // 5. Check Drone Requests
+      const droneRes = await api.getDroneRequests();
+      if (droneRes && droneRes.success && droneRes.data.length > 0) {
+        const droneReqs = droneRes.data.map(d => ({
+          id: `DRN-${d.id}`,
+          dbId: d.id,
+          serviceName: d.service_type,
+          acres: parseFloat(d.field_size_acres) || 4,
+          fieldLocation: d.field_location,
+          preferredDate: d.preferred_date ? d.preferred_date.split('T')[0] : '2026-09-22',
+          slot: d.preferred_slot || 'Morning 07:00 AM',
+          status: d.status,
+          pilotName: d.pilot_name || 'Aakash Kumar (DGCA Pilot)',
+          costEstimate: parseFloat(d.cost_estimate) || 1400,
+          isDemo: false
+        }));
+        this.save(STORAGE_KEYS.DRONE_REQUESTS, droneReqs);
+      }
+
+      // 6. Check Support Tickets
+      const ticketsRes = await api.getSupportTickets();
+      if (ticketsRes && ticketsRes.success && ticketsRes.data.length > 0) {
+        const tickets = ticketsRes.data.map(t => ({
+          id: `TCK-${t.id}`,
+          dbId: t.id,
+          subject: t.subject,
+          category: t.category,
+          status: t.status,
+          createdAt: t.created_at ? new Date(t.created_at).toLocaleString() : 'Recently',
+          description: t.message,
+          responses: [
+            { from: 'System', text: 'टिकट सिस्टम में दर्ज है।', time: 'Just now' }
+          ]
+        }));
+        this.save(STORAGE_KEYS.TICKETS, tickets);
+      }
+    } catch (e) {
+      console.warn('[MandiX] Failed to sync from backend, using cached localStorage state:', e.message);
     }
   }
 
@@ -237,11 +374,38 @@ class StateManager {
   getProfile() { return this.get(STORAGE_KEYS.PROFILE) || DEFAULT_PROFILE; }
   updateProfile(profileData) {
     const current = this.getProfile();
-    this.save(STORAGE_KEYS.PROFILE, { ...current, ...profileData });
+    const updated = { ...current, ...profileData };
+    this.save(STORAGE_KEYS.PROFILE, updated);
+
+    // Sync to MySQL
+    api.updateFarmer(current.id || 1, {
+      name: updated.name,
+      village: updated.village,
+      district: updated.district,
+      state: updated.state,
+      phone: updated.phone,
+      farm_size: updated.farmSize,
+      soil_type: updated.soilType,
+      primary_crop: updated.primaryCrop
+    });
   }
 
   getActiveToken() { return this.get(STORAGE_KEYS.ACTIVE_TOKEN); }
-  setActiveToken(token) { this.save(STORAGE_KEYS.ACTIVE_TOKEN, token); }
+  setActiveToken(token) {
+    this.save(STORAGE_KEYS.ACTIVE_TOKEN, token);
+
+    // Sync to MySQL
+    api.addQueueToken({
+      farmer_id: 1,
+      mandi_name: token.centerName,
+      crop: token.crop,
+      quantity_qtl: token.quantityQtl,
+      slot_date: token.slotDate,
+      slot_time: token.slotTime,
+      token_number: token.tokenNumber,
+      status: token.status || 'Active'
+    });
+  }
 
   getCart() { return this.get(STORAGE_KEYS.CART) || []; }
   saveCart(cart) { this.save(STORAGE_KEYS.CART, cart); }
@@ -251,6 +415,19 @@ class StateManager {
     const orders = this.getOrders();
     orders.unshift(order);
     this.save(STORAGE_KEYS.ORDERS, orders);
+
+    // Sync to MySQL
+    api.createFertilizerOrder({
+      farmer_id: 1,
+      item_name: order.productName,
+      category: order.category,
+      quantity: order.quantity,
+      unit_price: order.unitPrice,
+      total_price: order.totalPrice,
+      delivery_slot: order.deliverySlot,
+      address: order.address,
+      status: order.status || 'Ordered'
+    });
   }
 
   getBookings() { return this.get(STORAGE_KEYS.BOOKINGS) || []; }
@@ -258,6 +435,20 @@ class StateManager {
     const list = this.getBookings();
     list.unshift(booking);
     this.save(STORAGE_KEYS.BOOKINGS, list);
+
+    // Sync to MySQL
+    api.createEquipmentBooking({
+      farmer_id: 1,
+      equipment_name: booking.equipmentName,
+      category: booking.category,
+      provider: booking.provider,
+      booking_date: booking.startDate,
+      duration: booking.duration,
+      hours: booking.duration && booking.duration.includes('Hour') ? parseInt(booking.duration) : 8,
+      total_cost: booking.total,
+      operator_required: booking.operatorRequired,
+      status: booking.status || 'Confirmed'
+    });
   }
 
   getDroneRequests() { return this.get(STORAGE_KEYS.DRONE_REQUESTS) || []; }
@@ -265,6 +456,19 @@ class StateManager {
     const list = this.getDroneRequests();
     list.unshift(req);
     this.save(STORAGE_KEYS.DRONE_REQUESTS, list);
+
+    // Sync to MySQL
+    api.createDroneRequest({
+      farmer_id: 1,
+      service_type: req.serviceName,
+      field_location: req.fieldLocation,
+      field_size_acres: req.acres,
+      preferred_date: req.preferredDate,
+      preferred_slot: req.slot,
+      pilot_name: req.pilotName,
+      cost_estimate: req.costEstimate,
+      status: req.status || 'Requested'
+    });
   }
 
   getTickets() { return this.get(STORAGE_KEYS.TICKETS) || []; }
@@ -272,6 +476,16 @@ class StateManager {
     const list = this.getTickets();
     list.unshift(ticket);
     this.save(STORAGE_KEYS.TICKETS, list);
+
+    // Sync to MySQL
+    api.createSupportTicket({
+      farmer_id: 1,
+      category: ticket.category,
+      subject: ticket.subject,
+      message: ticket.description,
+      urgency: ticket.urgency || 'Normal',
+      status: ticket.status || 'Open'
+    });
   }
 
   getNotifications() { return this.get(STORAGE_KEYS.NOTIFICATIONS) || []; }
