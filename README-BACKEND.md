@@ -1,6 +1,6 @@
 # MandiX 2.0 - MySQL Backend Setup Guide
 
-This guide provides step-by-step instructions to set up, configure, and run the **Node.js + Express + MySQL REST API Backend** for the **MandiX Smart Farmer DigitalPlatform**.
+This guide provides step-by-step instructions to set , configure, and run the **Node.js + Express + MySQL REST API Backend** for the **MandiX Smart Farmer DigitalPlatform**.
 
 ---
 
